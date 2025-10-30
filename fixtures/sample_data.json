@@ -1,0 +1,8 @@
+[
+  {"model":"personnel.department","pk":1,"fields":{"name":"Engineering","code":"ENG","description":"Engineering Department","manager":null}},
+  {"model":"personnel.department","pk":2,"fields":{"name":"HR","code":"HR","description":"Human Resources","manager":null}},
+  {"model":"personnel.team","pk":1,"fields":{"name":"Platform","code":"PLT","department":1,"team_leader":null,"description":"Platform team"}},
+  {"model":"personnel.employee","pk":1,"fields":{"password":"pbkdf2_sha256$260000$example$hash","last_login":null,"is_superuser":true,"username":"admin","first_name":"Site","last_name":"Admin","email":"admin@example.com","is_staff":true,"is_active":true,"national_id":"0000000000","date_joined":"2025-01-01T00:00:00Z","department":1}},
+  {"model":"personnel.employee","pk":2,"fields":{"password":"pbkdf2_sha256$260000$example$hash2","last_login":null,"is_superuser":false,"username":"alice","first_name":"Alice","last_name":"Doe","email":"alice@example.com","is_staff":false,"is_active":true,"national_id":"1111111111","date_joined":"2025-01-10T00:00:00Z","department":1}},
+  {"model":"personnel.employee","pk":3,"fields":{"password":"pbkdf2_sha256$260000$example$hash3","last_login":null,"is_superuser":false,"username":"bob","first_name":"Bob","last_name":"Builder","email":"bob@example.com","is_staff":false,"is_active":true,"national_id":"2222222222","date_joined":"2025-01-15T00:00:00Z","department":1}}
+]

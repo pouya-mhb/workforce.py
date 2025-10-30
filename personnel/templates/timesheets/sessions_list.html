@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>My Sessions</h2>
+  <table>
+    <thead><tr><th>Start</th><th>End</th><th>Hours</th><th>Location</th></tr></thead>
+    <tbody>
+      {% for s in sessions %}
+        <tr>
+          <td>{{ s.start_time }}</td>
+          <td>{{ s.end_time|default:"(open)" }}</td>
+          <td>{{ s.duration_hours|default:"-" }}</td>
+          <td>{{ s.location }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">No sessions</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

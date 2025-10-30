@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Pending Reviews</h2>
+  <h3>As Team Leader</h3>
+  <ul>
+    {% for l in as_leader %}
+      <li>{{ l.applicant.get_full_name }}: {{ l.start_date }}→{{ l.end_date }}
+        <form method="post" action="#" style="display:inline;">
+          {% csrf_token %}
+          <button formaction="{% url 'admin:personnel_leaverequest_change' l.id %}">Open (admin)</button>
+        </form>
+      </li>
+    {% empty %}
+      <li>No leader tasks</li>
+    {% endfor %}
+  </ul>
+
+  <h3>As Manager</h3>
+  <ul>
+    {% for l in as_manager %}
+      <li>{{ l.applicant.get_full_name }}: {{ l.start_date }}→{{ l.end_date }}
+        <form method="post" action="#" style="display:inline;">
+          {% csrf_token %}
+          <button formaction="{% url 'admin:personnel_leaverequest_change' l.id %}">Open (admin)</button>
+        </form>
+      </li>
+    {% empty %}
+      <li>No manager tasks</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

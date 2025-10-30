@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>My Leave Requests</h2>
+  <a href="{% url 'personnel:leave_create' %}">Create leave request</a>
+  <ul>
+    {% for l in leaves %}
+      <li>{{ l.start_date }} → {{ l.end_date }} — {{ l.status }}</li>
+    {% empty %}
+      <li>No leave requests</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

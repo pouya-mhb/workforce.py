@@ -1,0 +1,12 @@
+{% comment %} Simple placeholder: Notice model defined below {% endcomment %}
+{% load tz %}
+<ul>
+  {% for n in notices %}
+    <li>
+      <strong>{{ n.title }}</strong> — {{ n.published_at|localtime|date:"SHORT_DATETIME_FORMAT" }}
+      <div>{{ n.content|linebreaks }}</div>
+    </li>
+  {% empty %}
+    <li>No notices</li>
+  {% endfor %}
+</ul>

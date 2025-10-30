@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Welcome {{ request.user.get_full_name }}</h1>
+
+  <section>
+    <h2>Notice Board</h2>
+    {% include "dashboard/partials/notices_list.html" %}
+  </section>
+
+  <section>
+    <h2>Quick Submit Time</h2>
+    <form method="post" action="{% url 'personnel:timesheet_submit' %}">
+      {% csrf_token %}
+      {{ time_form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Start/Stop Session</h2>
+    <form method="post" action="{% url 'personnel:session_start' %}" style="display:inline;">
+      {% csrf_token %}
+      <input name="location" placeholder="location (optional)">
+      <button type="submit">Start</button>
+    </form>
+    <form method="post" action="{% url 'personnel:session_stop' %}" style="display:inline; margin-left:8px;">
+      {% csrf_token %}
+      <button type="submit">Stop</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Upcoming Approved Leaves</h2>
+    <ul>
+      {% for l in upcoming_leaves %}
+        <li>{{ l.applicant.get_full_name }}: {{ l.start_date }} → {{ l.end_date }}</li>
+      {% empty %}
+        <li>No upcoming leaves</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}
