@@ -1,32 +1,61 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Personnel</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize/modern-normalize.css">
-    <style>
-      body { font-family: system-ui, Arial; max-width: 900px; margin: 24px auto; padding: 8px; }
-      nav { display:flex; gap:12px; margin-bottom:12px; }
-      .notice { background:#f5f5f8; padding:8px; border-left:4px solid #ccc; margin-bottom:8px; }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <a href="{% url 'personnel:dashboard_home' %}">Dashboard</a>
-      <a href="{% url 'personnel:directory_list' %}">Directory</a>
-      <a href="{% url 'personnel:sessions_list' %}">My Sessions</a>
-      <a href="{% url 'personnel:leave_list' %}">My Leaves</a>
-      <a href="{% url 'personnel:leave_review_list' %}">Review Leaves</a>
-      <a href="{% url 'personnel:notifications' %}">Notifications</a>
-      <span style="margin-left:auto">{% if user.is_authenticated %}{{ user.get_full_name }} | <a href="{% url 'logout' %}">Logout</a>{% else %}<a href="{% url 'login' %}">Login</a>{% endif %}</span>
-    </nav>
 
-    {% if messages %}
-      {% for m in messages %}
-        <div class="notice">{{ m }}</div>
-      {% endfor %}
-    {% endif %}
+<head>
+  <meta charset="utf-8">
+  <title>Personnel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize/modern-normalize.css">
+  <style>
+    body {
+      font-family: system-ui, Arial;
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 8px;
+    }
 
-    {% block content %}{% endblock %}
-  </body>
+    nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .notice {
+      background: #f5f5f8;
+      padding: 8px;
+      border-left: 4px solid #ccc;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="{% url 'personnel:dashboard_home' %}">Dashboard</a>
+    <a href="{% url 'personnel:directory_list' %}">Directory</a>
+    <a href="{% url 'personnel:sessions_list' %}">My Sessions</a>
+    <a href="{% url 'personnel:leave_list' %}">My Leaves</a>
+    <a href="{% url 'personnel:leave_review_list' %}">Review Leaves</a>
+    <a href="{% url 'personnel:notifications' %}">Notifications</a>
+    <span style="margin-left:auto">
+      {% if user.is_authenticated %}
+      {{ user.get_full_name }} |
+      <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+      <form id="logout-form" method="post" action="{% url 'logout' %}" style="display:none;">
+        {% csrf_token %}
+      </form>
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </span>
+  </nav>
+
+  {% if messages %}
+  {% for m in messages %}
+  <div class="notice">{{ m }}</div>
+  {% endfor %}
+  {% endif %}
+
+  {% block content %}{% endblock %}
+</body>
+
 </html>
