@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Directory</h2>
-  <form method="get">
-    <input name="q" value="{{ q }}" placeholder="search by name, job, department">
-    <button type="submit">Search</button>
-  </form>
-  <ul>
-    {% for e in employees %}
-      <li>
-        {% if e.profile_picture %}<img src="{{ e.profile_picture.url }}" width="40" alt="avatar">{% endif %}
-        <strong>{{ e.get_full_name }}</strong> — {{ e.job_title }} — {{ e.department.name if e.department else "" }}
-        {% if e.office_line_number %} | Ext: {{ e.office_line_number }}{% endif %}
-      </li>
-    {% empty %}
-      <li>No results</li>
-    {% endfor %}
-  </ul>
+<h2>Directory</h2>
+<form method="get">
+  <input name="q" value="{{ q }}" placeholder="search by name, job, department">
+  <button type="submit">Search</button>
+</form>
+<ul>
+  {% for e in employees %}
+  <li>
+    {% if e.profile_picture %}<img src="{{ e.profile_picture.url }}" width="40" alt="avatar">{% endif %}
+    <strong>{{ e.get_full_name }}</strong> — {{ e.job_title }}{% if e.department %} — {{ e.department.name }}{% endif %}
+    {% if e.office_line_number %} | Ext: {{ e.office_line_number }}{% endif %}
+  </li>
+  {% empty %}
+  <li>No results</li>
+  {% endfor %}
+</ul>
 {% endblock %}
